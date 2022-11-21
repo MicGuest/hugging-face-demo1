@@ -20,7 +20,7 @@ with gr.Blocks() as demo:
       output = gr.Textbox(label="Output Text")
       b1 = gr.Button("Summarize!")
       b1.click(main, inputs=[text1], outputs=output)
-  gr.Markdown("""#### powered by [Tassle](https://bit.ly/3LXMklV)""")
+  gr.Markdown("""#### powered by *********""")
 
 
 if __name__ == "__main__":
