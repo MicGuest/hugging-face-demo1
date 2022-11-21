@@ -2,7 +2,7 @@ from transformers import pipeline
 import gradio as gr
 from gradio.mix import Parallel, Series
 
-io1 = gr.Interface.load('huggingface/sshleifer/distilbart-cnn-12-6')
+io1 = gr.Interface.load("huggingface/sshleifer/distilbart-cnn-12-6")
 io2 = gr.Interface.load("huggingface/facebook/bart-large-cnn")
 io3 = gr.Interface.load("huggingface/google/pegasus-xsum")                  
 
@@ -41,4 +41,4 @@ iface = Parallel(io1, io2, io3,
                  examples=sample, #replace "sample" with directory to let gradio scan through those files and give you the text
                  inputs = gr.inputs.Textbox(lines = 10, label="Text"))
 
-iface.launch(inline = False,share=True)
+iface.launch(inline = False)
