@@ -27,10 +27,10 @@ jobs:
       - name: Add remote
         env:
           HF: ${{ secrets.HF }}
-        run: git remote add space https://Michelin1:$HF@huggingface.co/spaces/michelin1/Demo1
+        run: git remote add space https://Michelin1:$HG@huggingface.co/spaces/michelin1/Demo1
       
       - name: Push to hub
         env:
           HF: ${{ secrets.HF }}
-        run: git remote add space https://Michelin1:$HF@huggingface.co/spaces/michelin1/Demo1 main
+        run: git remote add space https://Michelin1:$HG@huggingface.co/spaces/michelin1/Demo1 main
 
