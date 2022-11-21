@@ -26,11 +26,11 @@ jobs:
           fetch_depth: 0
       - name: Add remote
         env:
-          HF: ${{ secrets.HF }}
+          HF: ${{ secrets.HG }}
         run: git remote add space https://Michelin1:$HG@huggingface.co/spaces/michelin1/Demo1
       
       - name: Push to hub
         env:
-          HF: ${{ secrets.HF }}
+          HF: ${{ secrets.HG }}
         run: git remote add space https://Michelin1:$HG@huggingface.co/spaces/michelin1/Demo1 main
 
