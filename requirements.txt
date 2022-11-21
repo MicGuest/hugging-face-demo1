@@ -1,4 +1,4 @@
 torch
 gradio
 transformers
-tensorflow
+sentencepiece
