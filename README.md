@@ -3,7 +3,7 @@ Adding spaces for HF demo
 
 ---
 title: Demo HF spaces
-emoji: **:santa:**
+emoji: 🎅
 colorFrom: red
 colorTo: blue
 sdk: gradio
