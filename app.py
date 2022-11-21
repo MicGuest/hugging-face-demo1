@@ -1,23 +1,15 @@
 import gradio as gr
-import torch
-from transformers import BertTokenizerFast, EncoderDecoderModel
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
-ckpt = 'mrm8488/bert2bert_shared-spanish-finetuned-summarization'
-tokenizer = BertTokenizerFast.from_pretrained(ckpt)
-model = EncoderDecoderModel.from_pretrained(ckpt).to(device)
+examples = [
+  ["The tower is 324 metres (1,063 ft) tall, about the same height as an 81-storey building, and the tallest structure in Paris. Its base is square, measuring 125 metres (410 ft) on each side. During its construction, the Eiffel Tower surpassed the Washington Monument to become the tallest man-made structure in the world, a title it held for 41 years until the Chrysler Building in New York City was finished in 1930. It was the first structure to reach a height of 300 metres. Due to the addition of a broadcasting aerial at the top of the tower in 1957, it is now taller than the Chrysler Building by 5.2 metres (17 ft). Excluding transmitters, the Eiffel Tower is the second tallest free-standing structure in France after the Millau Viaduct."]
+]
 
-def generate_summary(text):
-
-   inputs = tokenizer([text], padding="max_length", truncation=True, max_length=512, return_tensors="pt")
-   input_ids = inputs.input_ids.to(device)
-   attention_mask = inputs.attention_mask.to(device)
-   output = model.generate(input_ids, attention_mask=attention_mask)
-   return tokenizer.decode(output[0], skip_special_tokens=True)
-
-demo = gr.Interface(fn=generate_summary, 
-                    inputs=gr.Textbox(lines=10, placeholder="Insert the text here"), 
-                    outputs=gr.Textbox(lines=4)
-                    )
+demo = gr.Interface.load(
+  "huggingface/sshleifer/distilbart-cnn-12-6",
+  inputs=gr.inputs.Textbox(label="Input"),
+  outputs=gr.outputs.Textbox(label="Output"),
+  title="Text Summarization Demo",
+  examples=examples
+)
 
 demo.launch()
