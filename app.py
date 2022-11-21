@@ -2,9 +2,9 @@ from transformers import pipeline
 import gradio as gr
 from gradio.mix import Parallel, Series
 
-io1 = gr.Interface.load("huggingface/sshleifer/distilbart-cnn-12-6")
-io2 = gr.Interface.load("huggingface/facebook/bart-large-cnn")
-io3 = gr.Interface.load("huggingface/google/pegasus-xsum")                  
+io1 = gr.Interface.load('huggingface/sshleifer/distilbart-cnn-12-6')
+io2 = gr.Interface.load('huggingface/facebook/bart-large-cnn')
+io3 = gr.Interface.load('huggingface/google/pegasus-xsum')                  
 
 desc =  "Let Hugging Face models summarize texts for you. Note: Shorter articles generate faster summaries. This summarizer uses bart-large-cnn model by Facebook, pegasus by Google and distilbart-cnn-12-6 by Sshleifer. You can compare these models against each other on their performances. Sample Text input is provided!"
         
