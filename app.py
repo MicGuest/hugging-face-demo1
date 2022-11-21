@@ -1,14 +1,23 @@
-from transformers import pipeline
 import gradio as gr
+import torch
+from transformers import BertTokenizerFast, EncoderDecoderModel
 
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+ckpt = 'mrm8488/bert2bert_shared-spanish-finetuned-summarization'
+tokenizer = BertTokenizerFast.from_pretrained(ckpt)
+model = EncoderDecoderModel.from_pretrained(ckpt).to(device)
 
-model = pipeline("summarization", model="t5-base", tokenizer="t5-base", framework="tf")
+def generate_summary(text):
 
-def predict(prompt):
-    summary = model(context, max_length=130, min_length=60)
-    return summary
+   inputs = tokenizer([text], padding="max_length", truncation=True, max_length=512, return_tensors="pt")
+   input_ids = inputs.input_ids.to(device)
+   attention_mask = inputs.attention_mask.to(device)
+   output = model.generate(input_ids, attention_mask=attention_mask)
+   return tokenizer.decode(output[0], skip_special_tokens=True)
 
+demo = gr.Interface(fn=generate_summary, 
+                    inputs=gr.Textbox(lines=10, placeholder="Insert the text here"), 
+                    outputs=gr.Textbox(lines=4)
+                    )
 
-# create an interface for the model
-with gr.Interface(predict, "textbox", "text") as interface:
-    interface.launch()
+demo.launch()
