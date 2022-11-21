@@ -41,4 +41,4 @@ iface = Parallel(io1, io2, io3,
                  examples=sample, #replace "sample" with directory to let gradio scan through those files and give you the text
                  inputs = gr.inputs.Textbox(lines = 10, label="Text"))
 
-iface.launch(inline = False,share=true)
+iface.launch(inline = False,share=True)
